@@ -15,9 +15,99 @@ body {
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
   background-color: var(--dark-color);
   overflow: hidden;
   perspective: 1000px;
+}
+
+.greeting {
+  position: fixed;
+  top: clamp(1.5rem, 5vh, 3.25rem);
+  left: 50%;
+  z-index: 30;
+  width: min(92vw, 760px);
+  color: #fff7f7;
+  text-align: center;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.greeting__eyebrow {
+  margin-bottom: 0.45rem;
+  color: #9fffe0;
+  font-size: clamp(0.78rem, 1.7vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  opacity: 0;
+  text-shadow: 0 0 14px rgba(159, 255, 224, 0.65);
+  animation: greeting-fade 0.9s ease 1s forwards;
+}
+
+.greeting__title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.04em 0.16em;
+  font-size: clamp(2rem, 6vw, 4.6rem);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.greeting__title span {
+  display: inline-block;
+  padding-bottom: 0.08em;
+  color: transparent;
+  background: linear-gradient(100deg, #ffffff 0%, #ffe08a 34%, #ff9fce 67%, #b9fff0 100%);
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 16px rgba(255, 210, 240, 0.28));
+  opacity: 0;
+  transform: translateY(1rem) scale(0.94);
+  animation:
+    word-bloom 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    title-shimmer 4.5s ease-in-out 3.7s infinite;
+  animation-delay: calc(1.35s + (var(--word-index) * 0.14s)), 3.7s;
+}
+
+.greeting__title span:nth-child(1) {
+  --word-index: 0;
+}
+
+.greeting__title span:nth-child(2) {
+  --word-index: 1;
+}
+
+.greeting__title span:nth-child(3) {
+  --word-index: 2;
+}
+
+.greeting__title span:nth-child(4) {
+  --word-index: 3;
+}
+
+.greeting__title span:nth-child(5) {
+  --word-index: 4;
+}
+
+.greeting__title span:nth-child(6) {
+  --word-index: 5;
+}
+
+.greeting__message {
+  max-width: 620px;
+  margin: 0.9rem auto 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(0.95rem, 2.1vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.6;
+  opacity: 0;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.22);
+  animation:
+    greeting-fade 0.9s ease 2.45s forwards,
+    message-float 4s ease-in-out 3.35s infinite;
 }
 
 .night {
@@ -29,6 +119,52 @@ body {
   height: 100%;
   filter: blur(0.1vmin);
   background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), linear-gradient(90deg, rgb(7, 107, 42), rgb(240, 240, 240));
+}
+
+@keyframes greeting-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(0.9rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes word-bloom {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.94);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-0.12rem) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes title-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes message-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.35rem);
+  }
 }
 
 .flowers {
